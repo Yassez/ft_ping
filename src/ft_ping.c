@@ -1,7 +1,9 @@
 #include <sys/socket.h>    // Sockets
 #include <netinet/ip.h>    // IP header
-#include <netinet/icmp.h>  // ICMP header
+#include <netinet/ip_icmp.h> // ICMP header
 #include <arpa/inet.h>     // inet_pton(), inet_ntoa()
+#include <netdb.h>
+
 #include <unistd.h>        // sleep(), getpid()
 #include <time.h>          // gettimeofday()
 #include <string.h>        // memcpy(), memset()
@@ -9,10 +11,17 @@
 #include <stdlib.h>        // exit()
 #include <errno.h>         // errno, strerror()
 
-#include <netdb.h>
 
 
 #define PAYLOAD_SIZE sizeof(struct timeval)
+
+#define RECV_BUF_SIZE 65536 // Max IP packet size
+
+
+void	timer()
+{
+
+}
 
 void	build_icmp_request(struct icmp *icmp_pkt, int seq)
 {
@@ -132,8 +141,6 @@ int main(int argc, char **argv)
 		close(sockfd);
 		exit(EXIT_FAILURE);
 	}
-
-
 
 
 	while(1)
